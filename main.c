@@ -19,9 +19,11 @@ int main()
         {
         case 1:
             cadastrar_rota(list);
+            
             setbuf(stdin, NULL);
             break;
         case 2:
+            cadastrar_ponto(list);
             break;
         case 3:
             break;
