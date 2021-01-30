@@ -2,13 +2,13 @@
 #include "RotaOnibus.c"
 #include <string.h>
 
-
 int main()
 {
     printf("--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
     Lista *list = cria_lista();
     int escolha = 0;
     int rotas = 0;
+    int x = 0;
     do
     {
         printf("\n1 - Cadastrar Rota\n");
@@ -22,16 +22,26 @@ int main()
         case 1:
             cadastrar_rota(list);
             rotas++;
-            cadastrar_ponto(list,rotas);
+            cadastrar_ponto(list, rotas);
             setbuf(stdin, NULL);
             break;
         case 2:
+            x = excluir_rota(list);
+            if (x == 0)
+            {
+                printf("ERRO AO EXCLUIR ROTA");
+            }
+            else
+                printf("EXCLUÍDO COM SUCESSO");
             break;
         case 3:
+            imprime_lista(list);
             break;
+        case 4:
+            break;
+        system("cls");
         }
-    
     } while (escolha != 4);
-    imprime_lista(list);
+
     return 0;
 }

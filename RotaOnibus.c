@@ -4,7 +4,6 @@
 #include <string.h>
 #include <conio.h>
 
-
 struct RotaOnibus
 {
     char nome_rota[50];
@@ -64,9 +63,11 @@ void cadastrar_rota(Lista *list)
     {
         no->prox = (*list);
         *list = no;
-    }else{
+    }
+    else
+    {
         aux = *list;
-        
+
         while (aux->prox != NULL)
         {
             aux = aux->prox;
@@ -80,7 +81,7 @@ void cadastrar_ponto(Lista *list, int rotas)
 {
     ElemC *cidade = (ElemC *)malloc(sizeof(ElemC));
     ElemR *no = (*list);
-    for (int i = 0; i < rotas-1; i++)
+    for (int i = 0; i < rotas - 1; i++)
     {
         no = no->prox;
     }
@@ -116,6 +117,32 @@ void cadastrar_ponto(Lista *list, int rotas)
         }
     } while (escolha != 2);
     system("cls");
+}
+
+int excluir_rota(Lista *list)
+{
+    ElemR *ant, *no = *list;
+    char rota[50];
+    int x = 1;
+    printf("Qual a rota que deseja exluir ?");
+    setbuf(stdin, NULL);
+    gets(rota);
+    x = strcmp(no->nome_rota, rota);
+    while (no != NULL && x != 0)
+    {
+        ant = no;
+        no = no->prox;
+        x = strcmp(no->nome_rota, rota);
+    }
+    if(no == NULL)//não encontrado
+        return 0;
+
+    if (no == *list) //remover o primeiro?
+        *list = no->prox;
+    else
+        ant->prox = no->prox;
+    free(no);
+    return 1;
 }
 
 void imprime_lista(Lista *list)
