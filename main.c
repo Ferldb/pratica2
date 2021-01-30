@@ -2,11 +2,13 @@
 #include "RotaOnibus.c"
 #include <string.h>
 
+
 int main()
 {
     printf("--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
     Lista *list = cria_lista();
     int escolha = 0;
+    int rotas = 0;
     do
     {
         printf("\n1 - Cadastrar Rota\n");
@@ -19,7 +21,8 @@ int main()
         {
         case 1:
             cadastrar_rota(list);
-            cadastrar_ponto(list);
+            rotas++;
+            cadastrar_ponto(list,rotas);
             setbuf(stdin, NULL);
             break;
         case 2:

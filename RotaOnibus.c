@@ -4,6 +4,7 @@
 #include <string.h>
 #include <conio.h>
 
+
 struct RotaOnibus
 {
     char nome_rota[50];
@@ -45,27 +46,44 @@ ListaCidade *cria_lista2()
 
 void cadastrar_rota(Lista *list)
 {
+    system("cls");
     ElemR *no = (ElemR *)malloc(sizeof(ElemR));
     ElemC *curitiba = (ElemC *)malloc(sizeof(ElemC));
+    ElemR *aux;
     no->prox_cidade = cria_lista2();
     printf("Qual o nome da rota ?");
     setbuf(stdin, NULL);
     gets(no->nome_rota);
-    if ((*(no)->prox_cidade) == NULL)
+    curitiba->prox = NULL;
+    strcpy(curitiba->nome, "Curitiba");
+    strcpy(curitiba->descricao, "Descricao de Curitiba");
+    curitiba->ant = NULL;
+    *(no)->prox_cidade = curitiba;
+    no->prox = NULL;
+    if ((*list) == NULL)
     {
-        curitiba->prox = NULL;
-        strcpy(curitiba->nome, "Curitiba");
-        strcpy(curitiba->descricao, "Descricao de Curitiba");
-        curitiba->ant = NULL;
-        *(no)->prox_cidade = curitiba;
+        no->prox = (*list);
         *list = no;
+    }else{
+        aux = *list;
+        
+        while (aux->prox != NULL)
+        {
+            aux = aux->prox;
+        }
+        *(no)->prox_cidade = curitiba;
+        aux->prox = no;
     }
 }
 
-void cadastrar_ponto(Lista *list)
+void cadastrar_ponto(Lista *list, int rotas)
 {
     ElemC *cidade = (ElemC *)malloc(sizeof(ElemC));
     ElemR *no = (*list);
+    for (int i = 0; i < rotas-1; i++)
+    {
+        no = no->prox;
+    }
     ElemC *aux;
     int escolha = 0;
     do
@@ -92,12 +110,12 @@ void cadastrar_ponto(Lista *list)
             }
             aux->prox = cidade;
             cidade->ant = aux;
-            *list = no;
             break;
         case 2:
             break;
         }
     } while (escolha != 2);
+    system("cls");
 }
 
 void imprime_lista(Lista *list)
@@ -105,17 +123,19 @@ void imprime_lista(Lista *list)
     if (list == NULL)
         return;
     ElemR *no = *list;
-    ElemC *cidade = *(no)->prox_cidade;
+    ElemC *cidade;
     while (no != NULL)
     {
         printf("-------------------------------\n");
         printf("Rota: %s\n", no->nome_rota);
+        cidade = *(no)->prox_cidade;
         while (cidade != NULL)
         {
             printf("Cidade: %s\n", cidade->nome);
             printf("Descricao: %s\n", cidade->descricao);
             cidade = cidade->prox;
         }
+        printf("-------------------------------\n");
         no = no->prox;
     }
 }
