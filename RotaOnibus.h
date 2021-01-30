@@ -1,3 +1,4 @@
+
 struct cidade
 {
     char nome[30];
@@ -7,5 +8,7 @@ struct cidade
 };
 
 typedef struct RotaOnibus* Lista;
+typedef struct Cidade* ListaCidade;
 
 Lista* cria_lista();
+void cadastrar_rota(Lista* list);
