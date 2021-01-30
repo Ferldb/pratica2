@@ -64,20 +64,40 @@ void cadastrar_rota(Lista *list)
 
 void cadastrar_ponto(Lista *list)
 {
-    ElemR *no = (ElemR *)malloc(sizeof(ElemR));
     ElemC *cidade = (ElemC *)malloc(sizeof(ElemC));
+    ElemR *no = (*list);
     ElemC *aux;
-    strcpy(cidade->nome, "Matinhos");
-    strcpy(cidade->descricao, "Descricao de Matinhos");
-    cidade->prox = NULL;
-    aux = *(no)->prox_cidade;
-    while (aux->prox != NULL)
+    int escolha = 0;
+    do
     {
-        aux = aux->prox;
-    }
-    aux->prox = cidade;
-    cidade->ant = aux;
-    *list = no;
+        printf("\n1 - Cadastrar Ponto\n");
+        printf("2 - Sair\n");
+        printf("Escolha: ");
+        scanf("%d", &escolha);
+        switch (escolha)
+        {
+        case 1:
+            cidade = (ElemC *)malloc(sizeof(ElemC));
+            printf("Qual o nome do ponto ?");
+            setbuf(stdin, NULL);
+            gets(cidade->nome);
+            printf("Qual a descricao do ponto ?");
+            setbuf(stdin, NULL);
+            gets(cidade->descricao);
+            cidade->prox = NULL;
+            aux = *(no)->prox_cidade;
+            while (aux->prox != NULL)
+            {
+                aux = aux->prox;
+            }
+            aux->prox = cidade;
+            cidade->ant = aux;
+            *list = no;
+            break;
+        case 2:
+            break;
+        }
+    } while (escolha != 2);
 }
 
 void imprime_lista(Lista *list)
