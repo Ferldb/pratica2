@@ -32,7 +32,7 @@ int main()
                 printf("ERRO AO EXCLUIR ROTA");
             }
             else
-                printf("EXCLUÍDO COM SUCESSO");
+                printf("EXCLUIDO COM SUCESSO");
             break;
         case 3:
             imprime_lista(list);

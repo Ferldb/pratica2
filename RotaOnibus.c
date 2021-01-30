@@ -134,7 +134,8 @@ int excluir_rota(Lista *list)
         no = no->prox;
         x = strcmp(no->nome_rota, rota);
     }
-    if(no == NULL)//não encontrado
+
+    if (no == NULL) //não encontrado
         return 0;
 
     if (no == *list) //remover o primeiro?
@@ -147,10 +148,55 @@ int excluir_rota(Lista *list)
 
 void imprime_lista(Lista *list)
 {
+    char rota[50];
+    int escolha, x = 1;
     if (list == NULL)
         return;
     ElemR *no = *list;
     ElemC *cidade;
+    printf("Qual a rota deseja visitar ?");
+    setbuf(stdin, NULL);
+    gets(rota);
+    x = strcmp(no->nome_rota, rota);
+    while (no != NULL && x != 0)
+    {
+        no = no->prox;
+        x = strcmp(no->nome_rota, rota);
+    }
+    cidade = *(no)->prox_cidade;
+    do
+    {
+        printf("-------------------------------\n");
+        printf("Rota: %s\n", no->nome_rota);
+        printf("Voce esta em %s\n", cidade->nome);
+        printf("%s\n", cidade->descricao);
+        printf("-------------------------------\n");
+        printf("\n1 - Ir para proxima cidade\n");
+        printf("2 - Voltar a cidade anterior\n");
+        printf("3 - Sair da Rota\n");
+        printf("Escolha: ");
+        scanf("%d", &escolha);
+        switch (escolha)
+        {
+        case 1:
+            cidade = cidade->prox; 
+            break;
+        case 2:
+            cidade = cidade->ant;
+            break;
+        case 3:
+            break;
+        }
+    } while (escolha != 3);
+}
+
+/*void imprime_lista(Lista *list)
+{
+    if (list == NULL)
+        return;
+    ElemR *no = *list;
+    ElemC *cidade;
+
     while (no != NULL)
     {
         printf("-------------------------------\n");
@@ -165,4 +211,4 @@ void imprime_lista(Lista *list)
         printf("-------------------------------\n");
         no = no->prox;
     }
-}
+}*/
