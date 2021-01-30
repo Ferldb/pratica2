@@ -55,7 +55,7 @@ void cadastrar_rota(Lista *list)
     gets(no->nome_rota);
     curitiba->prox = NULL;
     strcpy(curitiba->nome, "Curitiba");
-    strcpy(curitiba->descricao, "Descricao de Curitiba");
+    strcpy(curitiba->descricao, "Conhecida por ser a capital ecologica do Brasil");
     curitiba->ant = NULL;
     *(no)->prox_cidade = curitiba;
     no->prox = NULL;
@@ -160,6 +160,11 @@ void imprime_lista(Lista *list)
     x = strcmp(no->nome_rota, rota);
     while (no != NULL && x != 0)
     {
+        if (no == NULL)
+        {
+            printf("Rota não encontrada");
+            return;
+        }
         no = no->prox;
         x = strcmp(no->nome_rota, rota);
     }
@@ -179,36 +184,19 @@ void imprime_lista(Lista *list)
         switch (escolha)
         {
         case 1:
-            cidade = cidade->prox; 
+            if (cidade->prox != NULL)
+            {
+                cidade = cidade->prox;
+            }
             break;
         case 2:
-            cidade = cidade->ant;
+            if (cidade->ant != NULL)
+            {
+                cidade = cidade->ant;
+            }
             break;
         case 3:
             break;
         }
     } while (escolha != 3);
 }
-
-/*void imprime_lista(Lista *list)
-{
-    if (list == NULL)
-        return;
-    ElemR *no = *list;
-    ElemC *cidade;
-
-    while (no != NULL)
-    {
-        printf("-------------------------------\n");
-        printf("Rota: %s\n", no->nome_rota);
-        cidade = *(no)->prox_cidade;
-        while (cidade != NULL)
-        {
-            printf("Cidade: %s\n", cidade->nome);
-            printf("Descricao: %s\n", cidade->descricao);
-            cidade = cidade->prox;
-        }
-        printf("-------------------------------\n");
-        no = no->prox;
-    }
-}*/
