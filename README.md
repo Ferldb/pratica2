@@ -14,7 +14,7 @@ Objetivo: Implementar uma Lista de Rotas de Ônibus utilizando Listas Duplamente
 - [X] Implemente o programa de rotas como uma lista de listas;
 - [X] A lista que contém todas as rotas pode ser uma lista encadeada ou lista estática em vetor em vetor;
 - [X] Cada lista que representa uma rota deve ser uma lista duplamente encadeada;
-- [ ] Aplicar o conceito de nó descritor na lista duplamente encadeada.
+- [X] Aplicar o conceito de nó descritor na lista duplamente encadeada.
 - [X] Menu de Entrada:
     1. Cadastrar Rota
     2. Excluir Rota

@@ -19,6 +19,13 @@ struct cidade
     struct cidade *prox;
 };
 
+struct descritor
+{
+    struct cidade *inicio;
+    struct cidade *final;
+    int qtd;
+};
+
 typedef struct RotaOnibus ElemR;
 typedef struct cidade ElemC;
 
@@ -38,7 +45,9 @@ ListaCidade *cria_lista2()
     ListaCidade *list = (ListaCidade *)malloc(sizeof(ListaCidade));
     if (list != NULL)
     {
-        *list = NULL;
+        list->inicio = NULL;
+        list->final = NULL;
+        list->qtd = 0;
     }
     return list;
 }
@@ -57,7 +66,8 @@ void cadastrar_rota(Lista *list)
     strcpy(curitiba->nome, "Curitiba");
     strcpy(curitiba->descricao, "Conhecida por ser a capital ecologica do Brasil");
     curitiba->ant = NULL;
-    *(no)->prox_cidade = curitiba;
+    no->prox_cidade->inicio = curitiba;
+    no->prox_cidade->final = curitiba;
     no->prox = NULL;
     if ((*list) == NULL)
     {
@@ -72,13 +82,14 @@ void cadastrar_rota(Lista *list)
         {
             aux = aux->prox;
         }
-        *(no)->prox_cidade = curitiba;
+        no->prox_cidade->inicio = curitiba;
         aux->prox = no;
     }
 }
 
 void cadastrar_ponto(Lista *list, int rotas)
 {
+    system("cls");
     ElemC *cidade = (ElemC *)malloc(sizeof(ElemC));
     ElemR *no = (*list);
     for (int i = 0; i < rotas - 1; i++)
@@ -104,7 +115,7 @@ void cadastrar_ponto(Lista *list, int rotas)
             setbuf(stdin, NULL);
             gets(cidade->descricao);
             cidade->prox = NULL;
-            aux = *(no)->prox_cidade;
+            aux = no->prox_cidade->inicio;
             while (aux->prox != NULL)
             {
                 aux = aux->prox;
@@ -148,41 +159,49 @@ int excluir_rota(Lista *list)
 
 void imprime_lista(Lista *list)
 {
+    system("cls");
     char rota[50];
     int escolha, x = 1;
     if (list == NULL)
         return;
     ElemR *no = *list;
     ElemC *cidade;
-    while (no->prox != NULL)
+    printf("- - - - Rotas - - - -\n");
+    while (no != NULL)
     {
-        printf("%s\n",no->nome_rota);
+        printf("- %s\n", no->nome_rota);
         no = no->prox;
     }
     no = *list;
     printf("Qual a rota deseja visitar ?");
     setbuf(stdin, NULL);
     gets(rota);
-    x = strcmp(no->nome_rota, rota);
-    while (no->prox != NULL && x != 0)
+    while (no != NULL && x != 0)
     {
-        if (no->prox == NULL)
-        {
-            printf("Rota não encontrada");
-            return;
-        }
-        no = no->prox;
         x = strcmp(no->nome_rota, rota);
+        if (x != 0)
+        {
+            no = no->prox;
+        }
     }
-    cidade = *(no)->prox_cidade;
+    if (no == NULL)
+    {
+        printf("Rota nao encontrada");
+        return;
+    }
+    cidade = no->prox_cidade->inicio;
     do
     {
+        system("cls");
         printf("-------------------------------\n");
         printf("Rota: %s\n", no->nome_rota);
         printf("Voce esta em %s\n", cidade->nome);
         printf("%s\n", cidade->descricao);
         printf("-------------------------------\n");
-        printf("\n1 - Ir para proxima cidade\n");
+        if (cidade->prox != NULL)
+        {
+           printf("\n1 - Ir para proxima cidade\n");
+        }
         printf("2 - Voltar a cidade anterior\n");
         printf("3 - Sair da Rota\n");
         printf("Escolha: ");

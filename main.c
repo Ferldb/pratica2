@@ -4,13 +4,13 @@
 
 int main()
 {
-    printf("--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
     Lista *list = cria_lista();
     int escolha = 0;
     int rotas = 0;
     int x = 0;
     do
     {
+        printf("--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
         printf("\n1 - Cadastrar Rota\n");
         printf("2 - Excluir Rota\n");
         printf("3 - Visitar Rota\n");
