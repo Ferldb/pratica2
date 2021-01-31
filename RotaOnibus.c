@@ -142,13 +142,17 @@ int excluir_rota(Lista *list)
     while (no != NULL && x != 0)
     {
         ant = no;
-        no = no->prox;
         x = strcmp(no->nome_rota, rota);
+        if (x != 0)
+        {
+            no = no->prox;
+        }
     }
 
-    if (no == NULL) //não encontrado
+    if (no == NULL)
+    { //não encontrado
         return 0;
-
+    }
     if (no == *list) //remover o primeiro?
         *list = no->prox;
     else
@@ -186,7 +190,7 @@ void imprime_lista(Lista *list)
     }
     if (no == NULL)
     {
-        printf("Rota nao encontrada");
+        printf("Rota nao encontrada\n");
         return;
     }
     cidade = no->prox_cidade->inicio;
@@ -200,7 +204,7 @@ void imprime_lista(Lista *list)
         printf("-------------------------------\n");
         if (cidade->prox != NULL)
         {
-           printf("\n1 - Ir para proxima cidade\n");
+            printf("\n1 - Ir para proxima cidade\n");
         }
         printf("2 - Voltar a cidade anterior\n");
         printf("3 - Sair da Rota\n");

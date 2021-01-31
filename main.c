@@ -29,10 +29,10 @@ int main()
             x = excluir_rota(list);
             if (x == 0)
             {
-                printf("ERRO AO EXCLUIR ROTA");
+                printf("ERRO AO EXCLUIR ROTA!\n");
             }
             else
-                printf("EXCLUIDO COM SUCESSO");
+                printf("EXCLUIDO COM SUCESSO!\n");
             break;
         case 3:
             imprime_lista(list);
