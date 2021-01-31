@@ -154,13 +154,19 @@ void imprime_lista(Lista *list)
         return;
     ElemR *no = *list;
     ElemC *cidade;
+    while (no->prox != NULL)
+    {
+        printf("%s\n",no->nome_rota);
+        no = no->prox;
+    }
+    no = *list;
     printf("Qual a rota deseja visitar ?");
     setbuf(stdin, NULL);
     gets(rota);
     x = strcmp(no->nome_rota, rota);
-    while (no != NULL && x != 0)
+    while (no->prox != NULL && x != 0)
     {
-        if (no == NULL)
+        if (no->prox == NULL)
         {
             printf("Rota não encontrada");
             return;
