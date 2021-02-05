@@ -10,6 +10,7 @@ int main()
     int x = 0;
     do
     {
+        system("cls");
         printf("--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
         printf("\n1 - Cadastrar Rota\n");
         printf("2 - Excluir Rota\n");
@@ -33,6 +34,7 @@ int main()
             }
             else
                 printf("EXCLUIDO COM SUCESSO!\n");
+            system("pause;");
             break;
         case 3:
             imprime_lista(list);

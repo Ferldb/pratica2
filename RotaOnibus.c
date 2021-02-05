@@ -100,8 +100,9 @@ void cadastrar_ponto(Lista *list, int rotas)
     int escolha = 0;
     do
     {
-        printf("\n1 - Cadastrar Ponto\n");
-        printf("2 - Sair\n");
+        printf("1 - Cadastrar Ponto\n");
+        printf("Quando chegar ao destino:\n");
+        printf("2 - Concluir cadastro de rota\n");
         printf("Escolha: ");
         scanf("%d", &escolha);
         switch (escolha)
@@ -115,11 +116,7 @@ void cadastrar_ponto(Lista *list, int rotas)
             setbuf(stdin, NULL);
             gets(cidade->descricao);
             cidade->prox = NULL;
-            aux = no->prox_cidade->inicio;
-            while (aux->prox != NULL)
-            {
-                aux = aux->prox;
-            }
+            aux = no->prox_cidade->final;
             aux->prox = cidade;
             cidade->ant = aux;
             break;
@@ -133,8 +130,19 @@ void cadastrar_ponto(Lista *list, int rotas)
 int excluir_rota(Lista *list)
 {
     ElemR *ant, *no = *list;
+    if (no == NULL)
+    {
+        return 0;
+    }
     char rota[50];
     int x = 1;
+    printf("- - - - Rotas - - - -\n");
+    while (no != NULL)
+    {
+        printf("- %s\n", no->nome_rota);
+        no = no->prox;
+    }
+    no = *list;
     printf("Qual a rota que deseja exluir ?");
     setbuf(stdin, NULL);
     gets(rota);
@@ -191,6 +199,7 @@ void imprime_lista(Lista *list)
     if (no == NULL)
     {
         printf("Rota nao encontrada\n");
+        system("pause;");
         return;
     }
     cidade = no->prox_cidade->inicio;
@@ -204,9 +213,12 @@ void imprime_lista(Lista *list)
         printf("-------------------------------\n");
         if (cidade->prox != NULL)
         {
-            printf("\n1 - Ir para proxima cidade\n");
+            printf("1 - Ir para proxima cidade\n");
         }
-        printf("2 - Voltar a cidade anterior\n");
+        if (cidade->ant != NULL)
+        {
+             printf("2 - Voltar a cidade anterior\n");
+        }
         printf("3 - Sair da Rota\n");
         printf("Escolha: ");
         scanf("%d", &escolha);
