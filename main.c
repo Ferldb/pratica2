@@ -40,6 +40,7 @@ int main()
             imprime_lista(list);
             break;
         case 4:
+            libera_lista(list);
             break;
         system("cls");
         }

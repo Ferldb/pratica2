@@ -241,3 +241,15 @@ void imprime_lista(Lista *list)
         }
     } while (escolha != 3);
 }
+
+void libera_lista(Lista* list){
+    if(list != NULL){
+        ElemR* no;
+        while((*list) != NULL){
+            no = *list;
+            *list = (*list)->prox;
+            free(no);
+        }
+        free(list);
+    }
+}
