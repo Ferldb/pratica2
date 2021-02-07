@@ -1,48 +1,54 @@
 #include <stdio.h>
-#include "RotaOnibus.c"
 #include <string.h>
+#include "RotaOnibus.c"
 
-int main()
-{
-    Lista *list = cria_lista();
-    int escolha = 0;
-    int rotas = 0;
-    int x = 0;
-    do
-    {
+int main() {
+
+    Lista *list = cria_lista(); //ponteiro para ponteiro que recebe o in�cio da lista de rotas de �nibus
+
+    int escolha = 0, rotas = 0, x = 0;
+
+    do {
         system("cls");
-        printf("--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
-        printf("\n1 - Cadastrar Rota\n");
-        printf("2 - Excluir Rota\n");
-        printf("3 - Visitar Rota\n");
-        printf("4 - Sair\n");
-        printf("Escolha: ");
+        printf("\n--- BEM VINDO A COMPANHIA INTERMUNICIPAL DO PARANA ---\n");
+        printf("\n1. Cadastrar Rota");
+        printf("\n2. Excluir Rota");
+        printf("\n3. Visitar Rota");
+        printf("\n4. Sair");
+        printf("\n--> ");
         scanf("%d", &escolha);
-        switch (escolha)
-        {
-        case 1:
-            cadastrar_rota(list);
-            rotas++;
-            cadastrar_ponto(list, rotas);
-            setbuf(stdin, NULL);
-            break;
-        case 2:
-            x = excluir_rota(list);
-            if (x == 0)
-            {
-                printf("ERRO AO EXCLUIR ROTA!\n");
-            }
-            else
-                printf("EXCLUIDO COM SUCESSO!\n");
-            system("pause;");
-            break;
-        case 3:
-            imprime_lista(list);
-            break;
-        case 4:
-            libera_lista(list);
-            break;
-        system("cls");
+
+        switch (escolha) {
+
+            case 1:
+                cadastra_rota(list);
+                rotas++;
+                cadastra_ponto(list, rotas);
+                setbuf(stdin, NULL);
+                break;
+
+            case 2:
+                x = exclui_rota(list);
+                if (x == 1)
+                {
+                    rotas --;
+                }
+                
+                break;
+
+            case 3:
+                imprime_lista(list);
+                break;
+
+            case 4:
+                libera_lista(list);
+                break;
+
+            default:
+                printf("\nOpcao invalida!\n");
+                system("pause;");
+
+            system("cls");
         }
     } while (escolha != 4);
 
